@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col">
+        <h1>*ngIf</h1>
+        <hr>
+        @if (bandera) {
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        }
+        <div class="card bg-danger" style="width: 18rem;">
+            @if (bandera) {
+                <div class="card-body">
+                    <h5 class="card-title">{{mensajeAngular.nombre}}</h5>
+                    <p class="card-text">{{mensajeAngular.descripcion}}</p>
+                </div>
+            }@else {
+                <div class="card-body">
+                    <h5 class="card-title">{{mensajeJavaScript.nombre}}</h5>
+                    <p class="card-text">{{mensajeJavaScript.descripcion}}</p>
+                </div>
+            }
+        </div>
+        
+
+        <div class="mt-2">
+            <div class="d-grid gap-2 ">
+                <button class="btn btn-outline-success btn-block" (click)="mostrar()">
+                    Mostrar/no mostrar
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <h1>*ngFor</h1>
+        <hr>
+        <ul class="list-group">
+            @for (ele of aLenguajes; track $index) {
+                <li class="list-group-item">
+                    {{$index+1}}/{{$count}}-{{ele}}
+                </li>
+            }
+        </ul>
+    </div>
+</div>

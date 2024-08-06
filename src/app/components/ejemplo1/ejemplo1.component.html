@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col">
+        <h1>Ejemplo: Crear una lista y mostrar su resultado</h1>
+        <hr>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                   <th>#</th>
+                   <th>Descripcion</th>
+                   <th>Categoria</th>
+                   <th>Precio</th>
+                   <th>Stock</th> 
+                </tr>
+            </thead>
+            <tbody>
+                @for (product of aProducts; track $index) {
+                    @if (product.precio<=150) {
+                        <tr>
+                            <td class="fw-bold">{{product.id}}</td>
+                            <td class="fw-bold">{{product.descripcion | pipeCapitalize}}</td>
+                            <td class="fw-bold">{{product.categoria | pipeCapitalize}}</td>
+                            <td class="fw-bold">{{product.precio | currency:"EUR":true:".0"}}</td>
+                            @if (product.stock) {
+                                <td class="fw-bold">Con Stock</td>
+                            }@else {
+                                <td class="fw-bold text-danger">Sin Stock</td>
+                            }
+                        </tr>
+                    }@else {
+                        <tr>
+                            <td>{{product.id}}</td>
+                            <td>{{product.descripcion | pipeCapitalize}}</td>
+                            <td>{{product.categoria | pipeCapitalize}}</td>
+                            <td>{{product.precio | currency:"EUR":true:".0"}}</td>
+                            @if (product.stock) {
+                                <td>Con Stock </td>
+                            }@else {
+                                <td class="text-danger">Sin Stock</td>
+                            }
+                        </tr>
+                    }
+                    
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

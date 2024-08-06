@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col">
+        <h1>Formulario Reactivo</h1>
+        <hr>
+        <form [formGroup]="frm" (submit)="enviarDatos()" autocomplete="off">
+            <div class="mb-3">
+              <label class="form-label">Nombre y Apellidos</label>
+              <input type="text" class="form-control" formControlName="name" placeholder="Introduzca nombre y apellidos">
+              @if (name.errors?.["required"] && name.dirty) {
+                <small class="form-text text-danger">Dato requerido</small>
+              }@else if (name.errors?.["pattern"]) {
+                <small class="form-text text-danger">Formato incorrecto</small>
+              }
+              
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" formControlName="email" placeholder="Introduzca email">
+                @if (email.errors?.["required"] && email.dirty) {
+                    <small class="form-text text-danger">Dato requerido</small>
+                }@else if (email.errors?.["email"]) {
+                    <small class="form-text text-danger">Formato incorrecto</small>
+                }            
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" formControlName="password" placeholder="Introduzca contraseña">
+                @if (password.errors?.["required"] && password.dirty) {
+                    <small class="form-text text-danger">Dato requerido</small>
+                }@else if (password.errors?.["minlength"]) {
+                    <small class="form-text text-danger">La contraseña debe de ser mayor a 8 caracteres</small>
+                }@else if (password.errors?.["maxlength"]) {
+                    <small class="form-text text-danger">La contraseña debe de ser menor a 20 caracteres</small>
+                }
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Repita Password</label>
+                <input type="password" class="form-control" formControlName="repassword"  placeholder="Repita contraseña">
+                @if (repassword.errors?.["required"] && repassword.dirty) {
+                    <small class="form-text text-danger">Dato requerido</small>
+                }@else if (repassword.errors?.["passwordIdem"]) {
+                    <small class="form-text text-danger">La contraseña no coincide</small>
+                }
+            </div>
+            <div class="mb-3 form-check">
+                <div>
+                    <input type="checkbox" class="form-check-input" formControlName="terminos">
+                    <label class="form-check-label">Acepta los terminos</label>
+                </div>
+                @if (terminos.errors?.["requiredTrue"] && terminos.dirty) {
+                    <small class="form-text text-danger">Debes aceptar los términos</small>
+                }
+            </div>
+            <button type="submit" [disabled]="frm.invalid" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="col">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                   <th>#</th>
+                   <th>Nombre y apellidos</th>
+                   <th>Email</th>
+                   <th>Password</th> 
+                </tr>
+            </thead>
+            <tbody>
+                
+                @for (alumno of aAlumnos; track $index) {
+                    <tr>
+                        <td>{{$index +1}}</td>
+                        <td>{{alumno.name}}</td>
+                        <td>{{alumno.email}}</td>
+                        <td>{{alumno.password | astericPassword}}</td>
+                    </tr>
+                    
+                }@empty(){
+                    <tr>
+                        <td colspan="4" class="text-center">No hay registros</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

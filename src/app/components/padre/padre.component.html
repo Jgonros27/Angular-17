@@ -1,0 +1,18 @@
+<div class="row">
+    <div class="col">
+        <h1>Componente padre</h1>
+        <hr>
+        <form action="">
+            <div class="mb-3">
+                <label for="valor" class="form-label">Mensaje</label>
+                <input type="text" class="form-control" [(ngModel)]="mensaje" name="mensaje" placeholder="Introduzca mensaje">
+            </div>
+            <div>
+                <button type="button" (click)="envio()" class="btn btn-primary">Enviar mensaje</button>
+            </div>
+        </form>
+    </div>
+    <div class="col">
+        <app-hijo [mensajeDelPadre]="mensajeAlHijo" [aLista]="aLista" (mensajeDelHijo)="mensaje=$event"></app-hijo>
+    </div>
+</div>
